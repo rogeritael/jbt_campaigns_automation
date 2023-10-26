@@ -39,15 +39,12 @@ for index, (current_campaign, prev_campaign) in enumerate(zip(current_campaigns,
         sheets.createRow([campaign['name']])
         sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'])
         sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
-        sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR'], 'aaa'])
+        sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
 
         for index, campaign in prev_campaigns.iterrows():
             campaign = bingManager.processCampaign(campaign, file_path)
             if(campaign['name'] == current['name']):
-                print('igual')
-                sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR'], 'aaa'])
-
-    # sheets.createRow([''])
+                sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
 
 
         

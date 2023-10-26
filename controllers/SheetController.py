@@ -20,7 +20,7 @@ class SheetController:
         header.fill = PatternFill('solid', fgColor='4f24ee')
         header.font = Font(name='Space Grotesk', b=True, color='FFFFFF')
 
-    def createCampaignView(self, current_campaign: [], prev_campaign: [], ):
+    def createCampaignView(self, current_campaign: [], prev_campaign: []):
         sheet = self.active_sheet
         sheet.appen(current_campaign)
         sheet.appen(prev_campaign)
