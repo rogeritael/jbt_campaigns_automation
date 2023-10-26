@@ -1,34 +1,48 @@
-import locale
-
+# controllers
 from controllers.SheetController import SheetController
 from controllers.BingController import BingController
-locale.setlocale(locale.LC_ALL, 'pt-BR-UTF-8')
 
+# diretorio dos arquivos
 file_path = './csv/bing_09.csv'
 
+prev_month = int(file_path.split('_')[1].replace('.csv','')) -1
+if(prev_month < 10):
+    prev_month = f'0{int(file_path.split('_')[1].replace('.csv','')) -1}'
+
+prev_path = f'{file_path.split('_')[0]}_{prev_month}.csv' 
+
+# classes dos controladores
 bingManager = BingController()
-
 sheets = SheetController()
-bing_page = sheets.createSheet('bing')
 
-current_campaign = ''
-# with open(file_path, 'r') as file:
+# recuperando as campanhas de cada arquivos
+current_campaigns = bingManager.findCampaigns(file_path)
+prev_campaigns = bingManager.findCampaigns(prev_path)
 
-campaigns = bingManager.findCampaigns(file_path)
-
+# criaçao do pagina e header da midia
+bing_page = sheets.createSheet('Bing')
 sheets.createRow(['Bing Ads'])
 
-for index, campaign in campaigns.iterrows():
-    campaign = bingManager.processCampaign(campaign, file_path)
-    sheets.createRow([campaign['name']])
-    sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'])
-    sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
-    sheets.createRow([''])
 
-    sheets.setHeader('A1','F1')
-    sheets.setHeader('A2','F2')
+with open(file_path, 'r') as file:
 
+    campaigns = bingManager.findCampaigns(file)
+    sheets.createRow(['Bing Ads'])
 
+    for index, campaign in campaigns.iterrows():
+        campaign = bingManager.processCampaign(campaign, file_path)
+        sheets.createRow([campaign['name']])
+        sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'])
+        sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
+        sheets.createRow([''])
+
+        with open(prev_path, 'r') as file:
+            campaigns = bingManager.findCampaigns(file)
+
+            for index, campaign in campaigns.iterrows():
+                prev_campaign = bingManager.processCampaign(campaign, prev_path)
+                if(prev_campaign['name'] == campaign['name']):
+                    print(campaign['name'])
 
         # sheets.createSubHeader([campaign['name']], 'ffffff')
         

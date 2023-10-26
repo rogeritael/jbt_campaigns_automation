@@ -5,13 +5,12 @@ class BingController:
     def __init__(self):
         self.months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro' ,'Dezembro']
 
-    def findCampaigns(self, file_path) -> []:
-        with open(file_path, 'r') as file:
-            csv_file = pd.read_csv(file, sep=",")
+    def findCampaigns(self, file) -> []:
+        csv_file = pd.read_csv(file, sep=",")
 
-            campaigns = csv_file[csv_file['Campaign'] != '-']
+        campaigns = csv_file[csv_file['Campaign'] != '-']
 
-            return campaigns
+        return campaigns
 
     def processCampaign(self, campaign, file_path):
         file_name = os.path.basename(file_path)
