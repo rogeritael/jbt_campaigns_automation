@@ -47,7 +47,7 @@ for index, campaign in campaigns.iterrows():
     sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
 
     for index, campaign in prev_campaigns.iterrows():
-        campaign = bingManager.processCampaign(campaign, file_path)
+        campaign = bingManager.processCampaign(campaign, prev_path)
         if(campaign['name'] == current['name']):
             sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
             sheets.createRow([
