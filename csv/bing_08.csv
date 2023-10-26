@@ -1,0 +1,6 @@
+﻿Campaign ID,Status,Campaign,Budget,Budget Type,Spend,Optimization Score,Delivery,Campaign Type,Bid Strategy Name,Bid Strategy Type,Labels,Clicks,Impr.,CTR,Avg. CPC,Conv.,Top impr. rate,Abs. top impr. rate
+[436534626],Enabled,[RCK] Search - Serviços,15,DailyBudgetStandard,512.24,100%,Limited by budget,Search,,MaxClicks,,320,25389,1.32%,1.28,0,82.96%,60.47%
+[530467992],Enabled,[RCK] Search - Institucional Jitterbit,10,DailyBudgetStandard,3.12,100%,Eligible,Search,,MaxClicks,,28,79,35.44%,0.11,0,94.94%,94.94%
+Search total,-,-,-,-,487.25,-,-,-,-,-,-,389,28514,1.36%,1.25,0,83%,60.57%
+Audience total,-,-,-,-,0,-,-,-,-,-,-,0,0,0%,0,0,0%,0%
+Performance Max total,-,-,-,-,0,-,-,-,-,-,-,0,0,0%,0,0,0%,0%

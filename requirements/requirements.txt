@@ -1,0 +1,5 @@
+pandas
+numpy
+openpyxl
+
+# digite no console: "pip install -r requirements/requirements.txt" sem aspas para instalar as dependencias do projeto
