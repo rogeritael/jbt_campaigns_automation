@@ -31,7 +31,7 @@ with open(prev_path, 'r') as file:
 current = []
 headers = [1,2]
 
-sheets.createHeader('Bing Ads', 5)
+sheets.createHeader('Bing Ads', 5, 20)
 
 # pega cada header com nome de campanha e salva em headers para ser feito a estilizaçao
 for header in range(len(campaigns) - 1):
@@ -43,7 +43,7 @@ for index, campaign in campaigns.iterrows():
     current = campaign
 
     sheets.createHeader(campaign['name'], 5)
-    sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'])
+    sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'], highlight=True)
     sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
 
     for index, campaign in prev_campaigns.iterrows():
