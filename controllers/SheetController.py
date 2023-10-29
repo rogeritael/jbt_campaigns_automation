@@ -14,6 +14,7 @@ class SheetController:
         new_sheet = self.workbook.create_sheet(titulo)
         self.workbook.active = new_sheet
         self.active_sheet = new_sheet
+        self.current_row = 1
 
         return new_sheet
 
