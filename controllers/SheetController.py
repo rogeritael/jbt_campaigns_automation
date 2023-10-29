@@ -6,6 +6,9 @@ class SheetController:
         self.workbook = Workbook()
         self.active_sheet = None
         self.current_row = 1
+        default_sheet = self.workbook.get_sheet_by_name('Sheet')
+        if default_sheet:
+            self.workbook.remove(default_sheet)
 
     def createSheet(self, titulo: str = ''):
         new_sheet = self.workbook.create_sheet(titulo)

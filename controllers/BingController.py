@@ -27,11 +27,3 @@ class BingController:
         }
 
         return campaign
-    
-    def createCurrentCampaignView(self, file_path, sheets):
-        campaign = self.processCampaign(campaign, file_path)
-        current = campaign
-
-        sheets.createHeader(campaign['name'], 5)
-        sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'], highlight=True)
-        sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
