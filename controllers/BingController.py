@@ -15,7 +15,6 @@ class BingController:
     def processCampaign(self, campaign, file_path):
         file_name = os.path.basename(file_path)
         month = int(file_name.split('.csv')[0].split('bing_')[1])
-        print(file_name)
 
         campaign = {
             'name': campaign['Campaign'].encode('latin1').decode('utf-8'),

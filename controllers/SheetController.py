@@ -5,6 +5,7 @@ class SheetController:
     def __init__(self):
         self.workbook = Workbook()
         self.active_sheet = None
+        self.current_row = 1
 
     def createSheet(self, titulo: str = ''):
         new_sheet = self.workbook.create_sheet(titulo)
@@ -12,21 +13,34 @@ class SheetController:
         self.active_sheet = new_sheet
 
         return new_sheet
+
+    def createRow(self, columns: [], highlight: bool = False):
+        for index, column in enumerate(columns):
+
+            cell = self.active_sheet[f'{chr(index + 65)}{self.current_row}']
+            cell.alignment =  Alignment(vertical='center', horizontal='center')
+            cell.font = Font(name='Space Grotesk')
+
+            if highlight:
+                cell.font = Font(b=True)
+            
+            cell.value = column
+        
+        self.current_row += 1
     
-    def setHeader(self, starting_cell, end_cell):
-        self.active_sheet.merge_cells(f'{starting_cell}:{end_cell}')
-        header = self.active_sheet[starting_cell]
-        header.alignment =  Alignment(vertical='center', horizontal='center')
-        header.fill = PatternFill('solid', fgColor='4f24ee')
-        header.font = Font(name='Space Grotesk', b=True, color='FFFFFF')
+    def createHeader(self, value: str, range: int):
+        row = self.current_row
+        
+        self.active_sheet.merge_cells(f'A{row}:{chr(range + 65)}{row}')
+        cell = self.active_sheet[f'A{row}']
+        cell.value = value
+        cell.alignment =  Alignment(vertical='center', horizontal='center')
+        cell.fill = PatternFill('solid', fgColor='4f24ee')
+        cell.font = Font(name='Space Grotesk', b=True, color='FFFFFF')
 
-    def createCampaignView(self, current_campaign: [], prev_campaign: []):
-        sheet = self.active_sheet
-        sheet.appen(current_campaign)
-        sheet.appen(prev_campaign)
+        self.current_row += 1
 
-    def createRow(self, columns: []):
-        self.active_sheet.append(columns)
+    
 
     def save(self):
         self.workbook.save('./sheets/dados.xlsx')

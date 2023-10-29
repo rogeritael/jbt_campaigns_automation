@@ -21,8 +21,6 @@ prev_campaigns = bingManager.findCampaigns(prev_path)
 
 # criaçao do pagina e header da midia
 bing_page = sheets.createSheet('Bing')
-sheets.createRow(['Bing Ads'])
-
 
 with open(file_path, 'r') as file:
     campaigns = bingManager.findCampaigns(file)
@@ -33,6 +31,8 @@ with open(prev_path, 'r') as file:
 current = []
 headers = [1,2]
 
+sheets.createHeader('Bing Ads', 5)
+
 # pega cada header com nome de campanha e salva em headers para ser feito a estilizaçao
 for header in range(len(campaigns) - 1):
     rows_per_campaign = 6
@@ -42,7 +42,7 @@ for index, campaign in campaigns.iterrows():
     campaign = bingManager.processCampaign(campaign, file_path)
     current = campaign
 
-    sheets.createRow([campaign['name']])
+    sheets.createHeader(campaign['name'], 5)
     sheets.createRow(['Mes','Investimento','Impressoes','Cliques','CPC','CTR'])
     sheets.createRow([campaign['month'], f'R$ {str(campaign['investiment']).replace('.',',')}', campaign['impressions'], campaign['clicks'], f'R$ {str(campaign['CPC']).replace('.',',')}', campaign['CTR']])
 
@@ -57,10 +57,10 @@ for index, campaign in campaigns.iterrows():
                 f'{(current['clicks']/campaign['clicks'] -1):.2f}%',
                 f'{(current['CPC'] /campaign['CPC'] -1):.2f}%',
                 f'{(float(str(current['CTR']).replace('%',''))/float(str(campaign['CTR']).replace('%','')) -1):.2f}%'
-            ])
+            ],
+                highlight=True
+            )
             sheets.createRow([''])
 
-for header in headers:
-    sheets.setHeader(f'A{header}', f'F{header}')
 
 sheets.save()
